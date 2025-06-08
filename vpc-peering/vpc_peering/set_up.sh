@@ -27,8 +27,10 @@ PEERING_ID=$(aws ec2 create-vpc-peering-connection \
 echo "Peering Connection ID: $PEERING_ID"
 
 # Accept the peering connection
-aws ec2 accept-vpc-peering-connection \
-  --vpc-peering-connection-id "$PEERING_ID"
+ACCEPT_VPC_PEERING_OUTPUT=$(aws ec2 accept-vpc-peering-connection \
+  --vpc-peering-connection-id "$PEERING_ID")
+
+echo "ACCEPT_VPC_PEERING_OUTPUT: $ACCEPT_VPC_PEERING_OUTPUT"
 
 echo "Peering connection accepted"
 
@@ -39,10 +41,12 @@ WEB_RT_ID=$(aws ec2 describe-route-tables \
   --output text)
 
 # Add route in Web_VPC for DB_VPC range (10.0.0.0/16)
-aws ec2 create-route \
+WEB_VPC_ADD_ROUTE=$(aws ec2 create-route \
   --route-table-id "$WEB_RT_ID" \
   --destination-cidr-block 10.0.0.0/16 \
-  --vpc-peering-connection-id "$PEERING_ID"
+  --vpc-peering-connection-id "$PEERING_ID")
+
+echo "WEB_VPC_ADD_ROUTE: $WEB_VPC_ADD_ROUTE"
 
 echo "Added route to Web_VPC route table for 10.0.0.0/16 via peering"
 
@@ -53,9 +57,12 @@ DB_RT_ID=$(aws ec2 describe-route-tables \
   --output text)
 
 # Add route in DB_VPC for Web_VPC range (192.168.0.0/16)
-aws ec2 create-route \
+DB_VPC_ADD_ROUTE=$(aws ec2 create-route \
   --route-table-id "$DB_RT_ID" \
   --destination-cidr-block 192.168.0.0/16 \
-  --vpc-peering-connection-id "$PEERING_ID"
+  --vpc-peering-connection-id "$PEERING_ID")
+
+echo "DB_VPC_ADD_ROUTE: $DB_VPC_ADD_ROUTE"
 
 echo "Added route to DB_VPC route table for 192.168.0.0/16 via peering"
+
