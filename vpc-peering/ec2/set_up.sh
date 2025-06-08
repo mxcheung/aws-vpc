@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+IAM_INSTANCE_PROFILE_NAME="EC2SSMRole"  # must match role created above
+
 # Get VPC ID
 WEB_VPC_ID=$(aws ec2 describe-vpcs \
   --filters "Name=tag:Name,Values=Web_VPC" \
@@ -40,6 +42,7 @@ INSTANCE_ID=$(aws ec2 run-instances \
   --subnet-id "$SUBNET_ID" \
   --associate-public-ip-address \
   --security-group-ids "$SG_ID" \
+  --iam-instance-profile Name="$IAM_INSTANCE_PROFILE_NAME" \
   --user-data file://user_data.sh \
   --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=WordPressInstance}]' \
   --query "Instances[0].InstanceId" \
