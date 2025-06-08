@@ -1,15 +1,21 @@
 #!/bin/bash
 
-# Assign the VPC ID to a variable
-VPC_ID=$(aws ec2 describe-vpcs --query "Vpcs[?Tags[?Key=='Name' && Value=='Web_VPC']].{VpcId:VpcId}" --output text)
+set -euo pipefail
 
-echo $VPC_ID
+# Fetch the VPC ID for Web_VPC
+VPC_ID=$(aws ec2 describe-vpcs \
+  --query "Vpcs[?Tags[?Key=='Name' && Value=='Web_VPC']].VpcId" \
+  --output text)
 
+echo "VPC ID: $VPC_ID"
+
+# Create a subnet in the specified VPC and AZ
 SUBNET_ID=$(aws ec2 create-subnet \
-  --vpc-id $VPC_ID \
+  --vpc-id "$VPC_ID" \
   --cidr-block 192.168.0.0/24 \
   --availability-zone us-east-1a \
-  --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=WebPublic}])
+  --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=WebPublic}]' \
+  --query "Subnet.SubnetId" \
+  --output text)
 
-echo $SUBNET_ID
-  
+echo "Subnet ID: $SUBNET_ID"
