@@ -2,7 +2,7 @@
 # create aws_access_key_id and aws_secret_access_key via cloudshell
 ```
 git clone https://github.com/mxcheung/aws-vpc.git
-cd /home/cloudshell-user/aws-ecs/word_press_ecs/user_credentials/
+cd /home/cloudshell-user/aws-vpc/vpc-peering/user_credentials/
 
 response=$(aws iam create-access-key --output json)
 
@@ -18,9 +18,9 @@ echo "AccessKeyId: $access_key_id"
 echo "SecretAccessKey: $secret_access_key"
 
 
-cd /home/cloudshell-user/aws-ecs/word_press_ecs/user_credentials/
+cd /home/cloudshell-user/aws-vpc/vpc-peering/user_credentials/
 . ./set_up.sh
-cd /home/cloudshell-user/aws-ecs/word_press_ecs/
+cd /home/cloudshell-user/aws-vpc/vpc-peering/
 . ./set_up.sh
 
 ```
