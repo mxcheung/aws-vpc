@@ -17,14 +17,22 @@ echo $APP_SG_ID
 echo "Authorize inbound HTTP access"
 
 # Authorize inbound HTTP access
-INGRESS_OUTPUT=$(aws ec2 authorize-security-group-ingress \
+INGRESS_HTTP_OUTPUT=$(aws ec2 authorize-security-group-ingress \
     --group-id $APP_SG_ID \
     --protocol tcp \
     --port 80 \
     --cidr 0.0.0.0/0)
     
-echo "Ingress output $INGRESS_OUTPUT"
+echo "Ingress output $INGRESS_HTTP_OUTPUT"
 
+# Add inbound SSH rule
+INGRESS_SSH_OUTPUT=$(aws ec2 authorize-security-group-ingress \
+    --group-id $APP_SG_ID \
+    --protocol tcp \
+    --port 22 \
+    --cidr 0.0.0.0/0)
+    
+echo "Ingress output $INGRESS_SSH_OUTPUT"
 
 # Variables
 WEB_VPC_CIDR="192.168.0.0/16"
