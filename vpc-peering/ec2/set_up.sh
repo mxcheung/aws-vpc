@@ -33,13 +33,6 @@ echo "Using AMI ID: $AMI_ID"
 echo "Subnet ID: $SUBNET_ID"
 echo "Security Group ID: $SG_ID"
 
-# Authorize inbound HTTP access
-aws ec2 authorize-security-group-ingress \
-  --group-id "$SG_ID" \
-  --protocol tcp \
-  --port 80 \
-  --cidr 0.0.0.0/0
-
 # Launch the EC2 instance
 INSTANCE_ID=$(aws ec2 run-instances \
   --image-id "$AMI_ID" \
