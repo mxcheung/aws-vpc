@@ -17,3 +17,6 @@ cd /home/cloudshell-user/aws-vpc/vpc-peering/vpc_peering
 
 cd /home/cloudshell-user/aws-vpc/vpc-peering/security_group
 . ./set_up.sh
+
+cd /home/cloudshell-user/aws-vpc/vpc-peering/ec2
+. ./set_up.sh
