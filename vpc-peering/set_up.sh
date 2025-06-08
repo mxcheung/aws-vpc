@@ -21,6 +21,9 @@ cd /home/cloudshell-user/aws-vpc/vpc-peering/vpc_peering
 cd /home/cloudshell-user/aws-vpc/vpc-peering/iam
 . ./set_up.sh
 
+cd /home/cloudshell-user/aws-vpc/vpc-peering/keypair
+. ./set_up.sh
+
 cd /home/cloudshell-user/aws-vpc/vpc-peering/ec2
 . ./set_up.sh
 
