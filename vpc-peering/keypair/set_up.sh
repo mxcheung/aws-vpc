@@ -1,4 +1,5 @@
-cd /home/cloudshell-user/aws-vpc/vpc-peering/ec2/
+#!/bin/bash
+
 KEYPAIR=$(aws ec2 create-key-pair \
   --key-name MyKeyPair \
   --query "KeyMaterial" \
