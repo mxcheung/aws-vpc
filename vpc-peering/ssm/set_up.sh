@@ -30,6 +30,33 @@ FILE_PATH="/var/www/wordpress/wp-config.php"
 # Construct the sed command
 SED_COMMAND="sudo sed -i \"s/'DB_HOST', *'localhost'/'DB_HOST', '$RDS_ENDPOINT'/g\" $FILE_PATH"
 
+
+# Wait until the instance is in 'running' state
+echo "Waiting for instance to be in 'running' state..."
+aws ec2 wait instance-running --instance-ids "$INSTANCE_ID"
+echo "Instance is running."
+
+# Wait until system and instance status checks pass
+echo "Waiting for instance status checks to pass..."
+aws ec2 wait instance-status-ok --instance-ids "$INSTANCE_ID"
+echo "Instance status checks passed."
+
+# Wait until instance is registered with SSM
+echo "Waiting for instance to be SSM ready..."
+while true; do
+  SSM_STATUS=$(aws ssm describe-instance-information \
+    --query "InstanceInformationList[?InstanceId=='$INSTANCE_ID'].PingStatus" \
+    --output text)
+
+  if [ "$SSM_STATUS" = "Online" ]; then
+    echo "Instance is SSM ready."
+    break
+  else
+    echo "Still waiting for SSM... (Current status: $SSM_STATUS)"
+    sleep 5
+  fi
+done
+
 # Run sed remotely via AWS SSM
 aws ssm send-command \
   --instance-ids "$INSTANCE_ID" \
