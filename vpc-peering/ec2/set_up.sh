@@ -40,7 +40,7 @@ INSTANCE_ID=$(aws ec2 run-instances \
   --subnet-id "$SUBNET_ID" \
   --associate-public-ip-address \
   --security-group-ids "$SG_ID" \
-  --user-data file://userdata.sh \
+  --user-data file://user_data.sh \
   --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=WordPressInstance}]' \
   --query "Instances[0].InstanceId" \
   --output text)
