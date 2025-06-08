@@ -17,7 +17,7 @@ SUBNET_ID=$(aws ec2 describe-subnets \
 # Get the latest Ubuntu 24.04 LTS AMI ID in the region
 AMI_ID=$(aws ec2 describe-images \
   --owners 099720109477 \
-  --filters "Name=name,Values=ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20250530" \
+  --filters "Name=name,Values=ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*" \
             "Name=architecture,Values=x86_64" \
             "Name=root-device-type,Values=ebs" \
             "Name=virtualization-type,Values=hvm" \
