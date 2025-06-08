@@ -21,7 +21,7 @@ echo "SecretAccessKey: $secret_access_key"
 cd /home/cloudshell-user/aws-vpc/vpc-peering/user_credentials/
 . ./set_up.sh
 cd /home/cloudshell-user/aws-vpc/vpc-peering/
-. ./set_up.sh
+. ./set_up.sh  > output.txt
 
 ```
 
