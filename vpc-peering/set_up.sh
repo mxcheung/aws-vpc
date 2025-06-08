@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /home/cloudshell-user/aws-ecs/word_press_ecs/user_credentials
+cd /home/cloudshell-user/aws-vpc/vpc-peering/user_credentials
 . ./set_up.sh
