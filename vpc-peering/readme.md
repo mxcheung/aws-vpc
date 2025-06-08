@@ -33,7 +33,7 @@ sudo vim /var/www/wordpress/wp-config.php
 RDS_ENDPOINT="your-rds-endpoint.rds.amazonaws.com"
 
 # Run this inside your instance or in your EC2 bootstrap script
-sed -i "s/'DB_HOST', *'localhost'/'DB_HOST', '$RDS_ENDPOINT'/g" /var/www/wordpress/wp-config.php
+sudo sed -i "s/'DB_HOST', *'localhost'/'DB_HOST', '$RDS_ENDPOINT'/g" /var/www/wordpress/wp-config.php
 ```
 
 # Reference
