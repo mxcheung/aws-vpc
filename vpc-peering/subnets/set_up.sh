@@ -5,3 +5,11 @@ VPC_ID=$(aws ec2 describe-vpcs --query "Vpcs[?Tags[?Key=='Name' && Value=='Web_V
 
 echo $VPC_ID
 
+SUBNET_ID=$(aws ec2 create-subnet \
+  --vpc-id <vpc-id> \
+  --cidr-block 192.168.0.0/24 \
+  --availability-zone us-east-1a \
+  --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=WebPublic}])
+
+echo $SUBNET_ID
+  
