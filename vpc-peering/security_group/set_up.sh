@@ -26,12 +26,11 @@ INGRESS_OUTPUT=$(aws ec2 authorize-security-group-ingress \
 
 
 # Variables
-RDS_SG_NAME="DatabaseSG"
 WEB_VPC_CIDR="192.168.0.0/16"
 
 # Get the Security Group ID for the RDS security group by name
 RDS_SG_ID=$(aws ec2 describe-security-groups \
-  --filters Name=group-name,Values=$RDS_SG_NAME \
+  --filters Name=description,Values=database-group \
   --query "SecurityGroups[0].GroupId" \
   --output text)
 
