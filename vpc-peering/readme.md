@@ -25,7 +25,9 @@ cd /home/cloudshell-user/aws-vpc/vpc-peering/
 
 ```
 
- 
+```
+sudo vim /var/www/wordpress/wp-config.php
+```
 
 # Reference
 https://learn.acloud.guru/handson/b9756e9f-5140-4ec7-b9b7-0ffaed561910/course/certified-solutions-architect-associate
