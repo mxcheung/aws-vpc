@@ -23,7 +23,7 @@ INSTANCE_ID=$(aws ec2 describe-instances \
   --query "Reservations[].Instances[].InstanceId" \
   --output text)
 
-echo " EC2 WordPressInstance instance ID: $INSTANCE_ID"
+echo "EC2 WordPressInstance instance ID: $INSTANCE_ID"
 
 FILE_PATH="/var/www/wordpress/wp-config.php"
 
