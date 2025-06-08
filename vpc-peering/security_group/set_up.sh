@@ -38,10 +38,10 @@ RDS_SG_ID=$(aws ec2 describe-security-groups \
 echo "RDS Security Group ID: $RDS_SG_ID"
 
 # Add inbound rule to allow MySQL/Aurora from Web_VPC CIDR
-aws ec2 authorize-security-group-ingress \
+INGRESS_OUTPUT=$(aws ec2 authorize-security-group-ingress \
   --group-id "$RDS_SG_ID" \
   --protocol tcp \
   --port 3306 \
-  --cidr "$WEB_VPC_CIDR"
+  --cidr "$WEB_VPC_CIDR")
 
 echo "Inbound rule added to $RDS_SG_NAME to allow MySQL from $WEB_VPC_CIDR"
