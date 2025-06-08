@@ -29,14 +29,10 @@ AMI_ID=$(aws ec2 describe-images \
 echo "Using AMI ID: $AMI_ID"
 echo "Subnet ID: $SUBNET_ID"
 
+# Find security group with name WebWordPressSG
+SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=WebWordPressSG --query "SecurityGroups[0].GroupId" --output text)
 
-# Create a security group
-SG_ID=$(aws ec2 create-security-group \
-  --group-name WebWordPressSG \
-  --description "Allow HTTP access to WordPress" \
-  --vpc-id "$WEB_VPC_ID" \
-  --query "GroupId" \
-  --output text)
+echo $SG_ID
 
 # Authorize inbound HTTP access
 aws ec2 authorize-security-group-ingress \
