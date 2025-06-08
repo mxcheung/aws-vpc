@@ -52,4 +52,4 @@ INGRESS_OUTPUT=$(aws ec2 authorize-security-group-ingress \
   --port 3306 \
   --cidr $WEB_VPC_CIDR)
 
-echo "Inbound rule added to $RDS_SG_NAME to allow MySQL from $WEB_VPC_CIDR"
+echo "Inbound rule added to $RDS_SG_ID to allow MySQL from $WEB_VPC_CIDR"
