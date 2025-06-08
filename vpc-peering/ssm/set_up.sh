@@ -17,7 +17,14 @@ RDS_ENDPOINT=$(aws rds describe-db-instances \
 
 echo "RDS ENDPOINT ID: $RDS_ENDPOINT"
 
-INSTANCE_ID="i-xxxxxxxxxxxxxxxxx"  # Replace with your EC2 instance ID
+INSTANCE_NAME="WordPressInstance"
+INSTANCE_ID=$(aws ec2 describe-instances \
+  --filters "Name=tag:Name,Values=$INSTANCE_NAME" \
+  --query "Reservations[].Instances[].InstanceId" \
+  --output text)
+
+echo " EC2 WordPressInstance instance ID: $INSTANCE_ID"
+
 FILE_PATH="/var/www/wordpress/wp-config.php"
 
 # Construct the sed command
