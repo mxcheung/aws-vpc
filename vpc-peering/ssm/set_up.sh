@@ -1,7 +1,22 @@
 #!/bin/bash
 
 # Set your variables
-RDS_ENDPOINT="your-rds-endpoint.rds.amazonaws.com"
+
+# Get the Security Group ID for the RDS security group by name
+RDS_SG_ID=$(aws ec2 describe-security-groups \
+  --filters Name=description,Values=database-group \
+  --query "SecurityGroups[0].GroupId" \
+  --output text)
+
+echo "RDS Security Group ID: $RDS_SG_ID"
+
+
+RDS_ENDPOINT=$(aws rds describe-db-instances \
+  --query "DBInstances[?VpcSecurityGroups[?VpcSecurityGroupId=='$RDS_SG_ID']].Endpoint.Address" \
+  --output text)
+
+echo "RDS ENDPOINT ID: $RDS_ENDPOINT"
+
 INSTANCE_ID="i-xxxxxxxxxxxxxxxxx"  # Replace with your EC2 instance ID
 FILE_PATH="/var/www/wordpress/wp-config.php"
 
