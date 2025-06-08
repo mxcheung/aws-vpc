@@ -21,8 +21,9 @@ INGRESS_OUTPUT=$(aws ec2 authorize-security-group-ingress \
     --group-id $APP_SG_ID \
     --protocol tcp \
     --port 80 \
-    --cidr 0.0.0.0/0
+    --cidr 0.0.0.0/0)
     
+echo "Ingress output $INGRESS_OUTPUT"
 
 
 # Variables
