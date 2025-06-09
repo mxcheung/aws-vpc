@@ -21,7 +21,6 @@ EC2_PUBLIC_IP=$(aws ec2 describe-instances \
 
 echo "EC2 PUBLIC IP: $EC2_PUBLIC_IP"
 
-
 FILE_PATH="/var/www/wordpress/wp-config.php"
 
 
@@ -37,6 +36,8 @@ echo "RDS Security Group ID: $RDS_SG_ID"
 RDS_ENDPOINT=$(aws rds describe-db-instances \
   --query "DBInstances[?VpcSecurityGroups[?VpcSecurityGroupId=='$RDS_SG_ID']].Endpoint.Address" \
   --output text)
+
+echo "RDS ENDPOINT: $RDS_ENDPOINT"
 
 ssh -i $KEY_FILE ubuntu@$EC2_PUBLIC_IP  << 'EOF'
 sudo sed -i "s/'DB_HOST', *'localhost'/'DB_HOST', '$RDS_ENDPOINT'/g" /var/www/wordpress/wp-config.php
