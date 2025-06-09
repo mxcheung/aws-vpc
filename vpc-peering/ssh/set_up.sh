@@ -14,6 +14,18 @@ INSTANCE_ID=$(aws ec2 describe-instances \
 
 echo "EC2 WordPressInstance instance ID: $INSTANCE_ID"
 
+
+# Wait until the instance is in 'running' state
+echo "Waiting for instance to be in 'running' state..."
+aws ec2 wait instance-running --instance-ids "$INSTANCE_ID"
+echo "Instance is running."
+
+# Wait until system and instance status checks pass
+echo "Waiting for instance status checks to pass..."
+aws ec2 wait instance-status-ok --instance-ids "$INSTANCE_ID"
+echo "Instance status checks passed."
+
+
 EC2_PUBLIC_IP=$(aws ec2 describe-instances \
   --instance-ids "$INSTANCE_ID" \
   --query "Reservations[0].Instances[0].PublicIpAddress" \
