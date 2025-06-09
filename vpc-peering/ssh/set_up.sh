@@ -51,7 +51,7 @@ RDS_ENDPOINT=$(aws rds describe-db-instances \
 
 echo "RDS ENDPOINT: $RDS_ENDPOINT"
 
-ssh -i "$KEY_FILE" ubuntu@$EC2_PUBLIC_IP <<EOF
+ssh -i "$KEY_FILE" -o StrictHostKeyChecking=no ubuntu@$EC2_PUBLIC_IP <<EOF
 sudo sed -i "s/'DB_HOST', *'localhost'/'DB_HOST', '$RDS_ENDPOINT'/g" /var/www/wordpress/wp-config.php
 EOF
 
