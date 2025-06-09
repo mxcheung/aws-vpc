@@ -1,6 +1,6 @@
 #!/bin/bash
 
-KEY_FILE="/home/cloudshell-user/aws-vpc/vpc-peering/keypair/MyKeyPair.pem"
+KEY_FILE="MyKeyPair.pem"
 
 INSTANCE_NAME="WordPressInstance"
 INSTANCE_ID=$(aws ec2 describe-instances \
