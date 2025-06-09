@@ -1,5 +1,6 @@
 #!/bin/bash
 
+KEY_FILE="/home/cloudshell-user/aws-vpc/vpc-peering/keypair/MyKeyPair.pem"
 
 INSTANCE_NAME="WordPressInstance"
 INSTANCE_ID=$(aws ec2 describe-instances \
@@ -19,4 +20,4 @@ echo "EC2 PUBLIC IP: $EC2_PUBLIC_IP"
 
 FILE_PATH="/var/www/wordpress/wp-config.php"
 
-ssh -i MyKeyPair.pem ubuntu@<PUBLIC_IP>     # Ub
+ssh -i $KEY_FILE ubuntu@<PUBLIC_IP>     # Ubuntu
