@@ -4,7 +4,7 @@ set -euo pipefail
 
 IAM_INSTANCE_PROFILE_NAME="EC2SSMRole"  # must match role created above
 
-KEY_NAME="/home/cloudshell-user/aws-vpc/vpc-peering/keypair/MyKeyPair"
+KEY_NAME="/home/cloudshell-user/aws-vpc/vpc-peering/keypair/MyKeyPair.pem"
 
 # Get VPC ID
 WEB_VPC_ID=$(aws ec2 describe-vpcs \
