@@ -13,7 +13,7 @@ echo "EC2 WordPressInstance instance ID: $INSTANCE_ID"
 EC2_PUBLIC_IP=$(aws ec2 describe-instances \
   --instance-ids "$INSTANCE_ID" \
   --query "Reservations[0].Instances[0].PublicIpAddress" \
-  --output text_
+  --output text)
 
 echo "EC2 PUBLIC IP: $EC2_PUBLIC_IP"
 
