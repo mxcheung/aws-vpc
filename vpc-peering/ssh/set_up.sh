@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo cp /home/cloudshell-user/aws-vpc/vpc-peering/keypair/MyKeyPair.pem MyKeyPair.pem 
+sudo chmod 400 MyKeyPair.pem 
+
 KEY_FILE="MyKeyPair.pem"
 
 INSTANCE_NAME="WordPressInstance"
