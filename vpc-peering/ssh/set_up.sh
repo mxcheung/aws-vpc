@@ -38,8 +38,6 @@ RDS_ENDPOINT=$(aws rds describe-db-instances \
   --query "DBInstances[?VpcSecurityGroups[?VpcSecurityGroupId=='$RDS_SG_ID']].Endpoint.Address" \
   --output text)
 
-
 ssh -i $KEY_FILE ubuntu@$EC2_PUBLIC_IP  << 'EOF'
-RDS_ENDPOINT="your-rds-endpoint.rds.amazonaws.com"
 sudo sed -i "s/'DB_HOST', *'localhost'/'DB_HOST', '$RDS_ENDPOINT'/g" /var/www/wordpress/wp-config.php
 EOF
