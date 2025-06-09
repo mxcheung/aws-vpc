@@ -23,4 +23,4 @@ echo "EC2 PUBLIC IP: $EC2_PUBLIC_IP"
 
 FILE_PATH="/var/www/wordpress/wp-config.php"
 
-ssh -i $KEY_FILE ubuntu@<EC2_PUBLIC_IP>     # Ubuntu
+ssh -i $KEY_FILE ubuntu@$EC2_PUBLIC_IP     # Ubuntu
