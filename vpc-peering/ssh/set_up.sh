@@ -2,6 +2,7 @@
 
 sudo cp /home/cloudshell-user/aws-vpc/vpc-peering/keypair/MyKeyPair.pem MyKeyPair.pem 
 sudo chmod 400 MyKeyPair.pem 
+sudo chown cloudshell-user
 
 KEY_FILE="MyKeyPair.pem"
 
